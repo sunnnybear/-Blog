@@ -1,3 +1,3 @@
-![Aaron Swartz](https://github.com/younghz/Markdown/raw/master/Res/Aaron_Swartz.jpg)
+![](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/WechatIMG74.jpeg)
 
 # Zeno'Blog
