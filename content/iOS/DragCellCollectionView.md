@@ -1,8 +1,8 @@
-##分析 BMDragCellCollectionView
+## 分析 BMDragCellCollectionView
 
-![示意图](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif)
+![](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif)
 
-####为BMDragCellCollectionView添加长按手势
+#### 为BMDragCellCollectionView添加长按手势
 
     - (UILongPressGestureRecognizer *)longGesture {
         if (!_longGesture) {
@@ -12,7 +12,7 @@
         return _longGesture;
     }
 
-####长按手势响应事件
+#### 长按手势响应事件
 
 1.确定长按触摸点属于哪个___cell___，并确定其___indexpath___
 
@@ -120,7 +120,7 @@
                 cell.hidden = NO;
         }];
 
-####改变indexPath（_getChangedIndexPath）
+#### 改变indexPath（_getChangedIndexPath）
 
 1.获取触摸点的位置
 
@@ -162,7 +162,7 @@
         }
     }];
 
-####处理UIcollectionView数据源（_updateSourceData）
+#### 处理UIcollectionView数据源（_updateSourceData）
 
 1.获取数据源
 
