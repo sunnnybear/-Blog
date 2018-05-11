@@ -1,29 +1,30 @@
 ## 分析 BMDragCellCollectionView
 
 ![](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif)
-<div style="align: center">
-<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
-</div>
 
 ### 为BMDragCellCollectionView添加长按手势
-
-    - (UILongPressGestureRecognizer *)longGesture {
-        if (!_longGesture) {
-            _longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
-            _longGesture.minimumPressDuration = _minimumPressDuration;
-        }
-        return _longGesture;
+```objc
+- (UILongPressGestureRecognizer *)longGesture {
+    if (!_longGesture) {
+        _longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
+        _longGesture.minimumPressDuration = _minimumPressDuration;
     }
+    return _longGesture;
+}
+```
 
 ### 长按手势响应事件
 
 1.确定长按触摸点属于哪个___cell___，并确定其___indexpath___
 
+```objc
     CGPoint point = [longGesture locationInView:self]; 
     NSIndexPath *indexPath = [self indexPathForItemAtPoint:point];
- 
+```
+
 2.通过 ___switch___语句,分情况讨论触___摸状态开始___、___触摸状态改变___、和___其它___三种情况情况
 
+```objc
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan: {}
             break;
@@ -32,25 +33,32 @@
         default: {}
             break;
         }
-    
+```
 
-* 触摸开始（刚按住屏幕）  
-    判断手势落点位置是否在___cell___上，没有就break  
 
+3.触摸开始（刚按住屏幕）  
+
+判断手势落点位置是否在___cell___上，没有就break  
+
+```objc
         _oldIndexPath = indexPath;
             
         // 没有按在cell 上就 break
         if (_oldIndexPath == nil) {
             break;
         }
+```  
 
-    取出被长按的___cell___,并获取其中心点  
+取出被长按的___cell___,并获取其中心点  
 
-        UICollectionViewCell *cell = [self cellForItemAtIndexPath:_oldIndexPath];
+```objc
+        UICollectionViewCell *cell = [self cellForItemAtIndexPath:_oldIndexPath];  
         self.oldPoint = cell.center;
+```
 
-    把___snapedView___置___nil___,并创建新___snapedView___(___snapedView___是___cell___图像的一个拷贝，当用户拖动___cell___的时候其实拖动的是___snapedView___，真正的___cell___已经被隐藏了)  
+把___snapedView___置___nil___,并创建新___snapedView___(___snapedView___是___cell___图像的一个拷贝，当用户拖动___cell___的时候其实拖动的是___snapedView___，真正的___cell___已经被隐藏了)  
 
+```objc
         // 先置nil
         if (_snapedView) {
             _snapedView = nil;
@@ -69,26 +77,32 @@
         [self addSubview:_snapedView];  
         //截图后隐藏当前cell
         cell.hidden = YES;
+```
 
-* 触摸状态改变（开始移动）  
+4.触摸状态改变（开始移动）  
     
-    获取当前手指位置  
+获取当前手指位置  
 
+```objc
         // 当前手指位置
         _lastPoint = point;
         // 截图视图位置移动
         [UIView animateWithDuration:0.1 animations:^{
             _snapedView.center = _lastPoint;
         }];  
+```
 
-    当手指移动到新位置时，需更新____currentIndexPath___和___self.oldPoint___的值  
+当手指移动到新位置时，需更新____currentIndexPath___和___self.oldPoint___的值  
 
+```objc
          NSIndexPath *index = [self _getChangedIndexPath];
          _currentIndexPath = index;
         self.oldPoint = [self cellForItemAtIndexPath:_currentIndexPath].center;
+```
 
-    更新数据源  
+更新数据源  
 
+```objc
         // 操作
         [self _updateSourceData];
             
@@ -99,15 +113,19 @@
         // 设置移动后的起始indexPath
         _oldIndexPath = _currentIndexPath;
         [self reloadItemsAtIndexPaths:@[_oldIndexPath]];
+```
 
-* 其它（移动结束）  
+5.移动结束  
 
-    找到当下的___indexPath___
+找到当下的___indexPath___
 
+```objc
         UICollectionViewCell *cell = [self cellForItemAtIndexPath:_oldIndexPath];  
+```
 
-    结束动画（移除____snapedView___,___显示cell___）  
+结束动画（移除____snapedView___,___显示cell___）  
 
+```objc
         [UIView animateWithDuration:0.25 animations:^{
                 if (!cell) {
                     _snapedView.center = _oldPoint;
@@ -122,6 +140,7 @@
                 _snapedView = nil;
                 cell.hidden = NO;
         }];
+```
 
 ### 改变indexPath（_getChangedIndexPath）
 
