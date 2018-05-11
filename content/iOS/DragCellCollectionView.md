@@ -1,8 +1,11 @@
 ## 分析 BMDragCellCollectionView
 
 ![](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif)
+<div style="align: center">
+<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"/>
+</div>
 
-#### 为BMDragCellCollectionView添加长按手势
+### 为BMDragCellCollectionView添加长按手势
 
     - (UILongPressGestureRecognizer *)longGesture {
         if (!_longGesture) {
@@ -12,7 +15,7 @@
         return _longGesture;
     }
 
-#### 长按手势响应事件
+### 长按手势响应事件
 
 1.确定长按触摸点属于哪个___cell___，并确定其___indexpath___
 
@@ -120,7 +123,7 @@
                 cell.hidden = NO;
         }];
 
-#### 改变indexPath（_getChangedIndexPath）
+### 改变indexPath（_getChangedIndexPath）
 
 1.获取触摸点的位置
 
@@ -162,7 +165,7 @@
         }
     }];
 
-#### 处理UIcollectionView数据源（_updateSourceData）
+### 处理UIcollectionView数据源（_updateSourceData）
 
 1.获取数据源
 
@@ -201,7 +204,7 @@
     // 更新外面的数据源
     [self.delegate dragCellCollectionView:self newDataArrayAfterMove:array];
 
-#### 整体思路
+### 整体思路
 1. 添加长按手势  
 2. 判断长按的位置是否在cell 上，如果在，找到其indexPath  
 3. 用系统快照功能对这个cell进行快照，然后隐藏cell  
