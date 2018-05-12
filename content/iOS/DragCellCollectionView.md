@@ -1,6 +1,8 @@
 ## 分析 BMDragCellCollectionView
 
-![](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif)
+<p align="center"> 
+<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/BMDrog.gif">
+</p> 
 
 ### 为BMDragCellCollectionView添加长按手势
 ```objc
@@ -146,28 +148,35 @@
 
 1.获取触摸点的位置
 
+```objc
     CGPoint point = [self.longGesture locationInView:self];  
+```
 
 2.遍历拖拽的___cell___的中心点在哪个___cell___里
 
+```objc
     [[self visibleCells] enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (CGRectContainsPoint(obj.frame, point)) {
             index = [self indexPathForCell:obj];
             *stop = YES;
         }
     }];
+```
 
 3.找到且不是当前___cell___就返回此___indexPath___
 
+```objc
     if (index) {
         if ((index.item == self.oldIndexPath.item) && (index.row == self.oldIndexPath.row)) {
             return nil;
         }
         return index;
     }
+```
 
 4.如果触摸点没落在任何___cell___中，则找到最应该交换的___cell___
 
+```objc
     [[self visibleCells] enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (CGRectContainsPoint(obj.frame, point)) {
             index = [self indexPathForCell:obj];
@@ -183,16 +192,20 @@
             index = [self indexPathForCell:obj];
         }
     }];
+```
 
 ### 处理UIcollectionView数据源（_updateSourceData）
 
 1.获取数据源
 
+```objc
     // 获取数据源
     NSMutableArray *array = [self.dataSource dataSourceWithDragCellCollectionView:self].mutableCopy;
+```
 
 2.处理数据
 
+```objc
     // ==========处理数据
     BOOL dataTypeCheck = ([self numberOfSections] != 1 || ([self  numberOfSections] == 1 && [array[0] isKindOfClass:NSArray.class]));
     if (dataTypeCheck) {
@@ -217,11 +230,14 @@
         [currentSection insertObject:orignalSection[_oldIndexPath.item] atIndex:_currentIndexPath.item];
         [orignalSection removeObject:orignalSection[_oldIndexPath.item]];
     }
+```
 
 3.通过代理更新视图控制器的数据源  
 
+```objc
     // 更新外面的数据源
     [self.delegate dragCellCollectionView:self newDataArrayAfterMove:array];
+```
 
 ### 整体思路
 1. 添加长按手势  
