@@ -17,14 +17,14 @@
 
 ### 长按手势响应事件
 
-1.确定长按触摸点属于哪个___cell___，并确定其___indexpath___
+1.确定长按触摸点属于哪个cell，并确定其indexpath
 
 ```objc
     CGPoint point = [longGesture locationInView:self]; 
     NSIndexPath *indexPath = [self indexPathForItemAtPoint:point];
 ```
 
-2.通过 ___switch___语句,分情况讨论触___摸状态开始___、___触摸状态改变___、和___其它___三种情况情况
+2.通过 switch语句,分情况讨论触摸状态开始、触摸状态改变、和其它三种情况情况
 
 ```objc
     switch (longGesture.state) {
@@ -40,7 +40,7 @@
 
 3.触摸开始（刚按住屏幕）  
 
-判断手势落点位置是否在___cell___上，没有就break  
+判断手势落点位置是否在cell上，没有就break  
 
 ```objc
         _oldIndexPath = indexPath;
@@ -51,14 +51,14 @@
         }
 ```  
 
-取出被长按的___cell___,并获取其中心点  
+取出被长按的cell,并获取其中心点  
 
 ```objc
         UICollectionViewCell *cell = [self cellForItemAtIndexPath:_oldIndexPath];  
         self.oldPoint = cell.center;
 ```
 
-把___snapedView___置___nil___,并创建新___snapedView___(___snapedView___是___cell___图像的一个拷贝，当用户拖动___cell___的时候其实拖动的是___snapedView___，真正的___cell___已经被隐藏了)  
+把snapedView置nil,并创建新snapedView(snapedView是cell图像的一个拷贝，当用户拖动cell的时候其实拖动的是snapedView，真正的cell已经被隐藏了)  
 
 ```objc
         // 先置nil
@@ -94,7 +94,7 @@
         }];  
 ```
 
-当手指移动到新位置时，需更新____currentIndexPath___和___self.oldPoint___的值  
+当手指移动到新位置时，需更新currentIndexPath和self.oldPoint的值  
 
 ```objc
          NSIndexPath *index = [self _getChangedIndexPath];
@@ -119,13 +119,13 @@
 
 5.移动结束  
 
-找到当下的___indexPath___
+找到当下的indexPath
 
 ```objc
         UICollectionViewCell *cell = [self cellForItemAtIndexPath:_oldIndexPath];  
 ```
 
-结束动画（移除____snapedView___,___显示cell___）  
+结束动画（移除snapedView,显示cell）  
 
 ```objc
         [UIView animateWithDuration:0.25 animations:^{
@@ -152,7 +152,7 @@
     CGPoint point = [self.longGesture locationInView:self];  
 ```
 
-2.遍历拖拽的___cell___的中心点在哪个___cell___里
+2.遍历拖拽的cell的中心点在哪个cell里
 
 ```objc
     [[self visibleCells] enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -163,7 +163,7 @@
     }];
 ```
 
-3.找到且不是当前___cell___就返回此___indexPath___
+3.找到且不是当前cell就返回此indexPath
 
 ```objc
     if (index) {
@@ -174,7 +174,7 @@
     }
 ```
 
-4.如果触摸点没落在任何___cell___中，则找到最应该交换的___cell___
+4.如果触摸点没落在任何cell中，则找到最应该交换的cell
 
 ```objc
     [[self visibleCells] enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
