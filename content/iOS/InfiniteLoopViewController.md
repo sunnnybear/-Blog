@@ -1,7 +1,7 @@
 ## 带有视差效果的无线轮播图
 
 <p align="center"> 
-<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/infinalloop.png">
+<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/infinalloop.gif">
 </p> 
 
 [动画原作者YouXianMing](https://github.com/YouXianMing/Animations)
@@ -122,6 +122,6 @@ loopCell.m
 @end
 ```
 <p align="center"> 
-<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/infinalloop.png">
+<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/infinaloop.png">
 </p> 
 
