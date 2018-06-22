@@ -3,7 +3,7 @@
 ### Block的定义
 
 <p align="center"> 
-<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/block.png">
+<img src="https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/block1.png">
 </p> 
 
 上图定义了一个int类型的并且含有一个int类型参数的block。
