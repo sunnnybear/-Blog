@@ -39,8 +39,10 @@ MyBlock block = ^(int num) {
 - (void)method:(int(^)(int))myBlock 
 
 ```
+更多用法  
+![图片取自http://fuckingblocksyntax.com](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/block2.png)
 
-![更多用法](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/block2.png)
+如果实在记不住怎么写block，可以直接在Xcode中打出"inlineBlock"，编译器会自动帮你补全。
 
 ### Block的类型
 
@@ -176,4 +178,9 @@ self.block = ^{
 
 警告消除。
 
-### Block应用场景
+### 参考资料：   
+[苹果官方文档](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502-CH1-SW1)   
+[正确使用Block避免Cycle Retain和Crash](http://tanqisen.github.io/blog/2013/04/19/gcd-block-cycle-retain/)  
+[谈Objective-C  block的实现](http://blog.devtang.com/2013/07/28/a-look-inside-blocks/)  
+[iOS之轻松上手block](http://ios.jobbole.com/84127/)  
+[](http://fuckingblocksyntax.com)
