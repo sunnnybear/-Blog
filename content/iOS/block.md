@@ -40,6 +40,8 @@ MyBlock block = ^(int num) {
 
 ```
 
+![更多用法](https://github.com/sunnnybear/Zeno-Blog/blob/master/content/images/block2.png)
+
 ### Block的类型
 
 Blokc按照在内从中的位置可以分为NSGlobalBlock，NSStackBlock和NSMallocBlock三种类型
