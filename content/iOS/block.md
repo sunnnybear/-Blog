@@ -83,27 +83,44 @@ NSLog(@"%@",mallocBlock);
 ```objc
     {
         int multiplier = 10;
-        int (^mallocBlock)(int) = ^(int num) {
+        int (^myBlock)(int) = ^(int num) {
             return multiplier * num;
         };
         multiplier = 100;
-        NSLog(@"%d",mallocBlock(2));
+        NSLog(@"基本数据类型 - 局部变量 %d",myBlock(2));
     }
     {
         static int multiplier = 10;
-        int (^mallocBlock)(int) = ^(int num) {
+        int (^myBlock)(int) = ^(int num) {
             return multiplier * num;
         };
         multiplier = 100;
-        NSLog(@"%d",mallocBlock(2));
+        NSLog(@"基本数据类型 - 静态变量 %d",myBlock(2));
+    }
+    {
+        NSString* multiplier = @"10";
+        int (^myBlock)(int) = ^(int num) {
+
+            return [multiplier intValue] * num;
+        };
+        multiplier = @"100";
+        NSLog(@"指针类型 - 局部变量 %d",myBlock(2));
+    }
+    {
+        static NSString* multiplier = @"10";
+        int (^myBlock)(int) = ^(int num) {
+            return [multiplier intValue] * num;
+        };
+        multiplier = @"100";
+        NSLog(@"指针类型 - 静态变量 %d",myBlock(2));
     }
     {
         __block int multiplier = 10;
-        int (^mallocBlock)(int) = ^(int num) {
+        int (^myBlock)(int) = ^(int num) {
             return multiplier * num;
         };
         multiplier = 100;
-        NSLog(@"%d",mallocBlock(2));
+        NSLog(@"带有__block关键字的基本类型 - 局部变量 %d",myBlock(2));
     }
 ```
 上边这些Block都引用了外部的变量，那么打印结果会是怎样的呢？
