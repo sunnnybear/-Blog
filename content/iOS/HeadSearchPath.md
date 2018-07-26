@@ -1,6 +1,6 @@
 ## Pods里的第三方控件报错“xxx not found”
 
-1.Build settings -> Header Search Paths
+1.Target -> Build settings -> Header Search Paths
 
 2.里边填写第三方控件的本地路径
 
