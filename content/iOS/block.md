@@ -165,7 +165,7 @@ Person *p1 = [[Person alloc] init];
 ```objc
 Capturing 'p1' strongly in this block is likely to lead to a retain cycle
 ```
-捕捉到p1在这个block中是强引用，可能会造成循环引用。
+这样改写，把p1改成弱引用，警告消除。
 
 ```objc
 __block Person *p1 = [[Person alloc] init];
@@ -174,7 +174,6 @@ __block Person *p1 = [[Person alloc] init];
         p1 = nil;
     }];
 ```
-这样改写，把p1改成弱引用，警告消除。
 
 下边这样写也会造成警告：
 
