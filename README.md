@@ -12,3 +12,4 @@
 ## 随笔
 
 ## 改变
+Creating a new branch is quick & simple.
